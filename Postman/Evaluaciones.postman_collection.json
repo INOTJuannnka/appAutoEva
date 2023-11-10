@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "32977577-e84b-4986-a6ed-3b89cf2f5589",
+		"name": "Evaluaciones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31044804"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/evaluaciones",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"evaluaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostRequest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"LAB_ID\": 1,\r\n  \"PER_ID\": 2,\r\n  \"USEROL_ID\": null,\r\n  \"EVA_ESTADO\": 1,\r\n  \"EVA_PUNTAJE\": 3.5,\r\n  \"EVA_RESULTADO\": \"Aprobado\",\r\n  \"EVA_EVIDENCIA\": \"https://ejemplo.com/evidencia\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/api/evaluaciones",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"evaluaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutRequest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/evaluaciones",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"evaluaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRequest",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/api/evaluaciones/1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"evaluaciones",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
