@@ -1,5 +1,7 @@
 const connection = require('../config/db');
 const jwt = require('jsonwebtoken');
+
+//Obtener todos los usuarios
 exports.getUsuarios = async (req, res) => {
     const query = 'SELECT * FROM usuario';
   connection.query(query, (error, results) => {
@@ -11,6 +13,27 @@ exports.getUsuarios = async (req, res) => {
     }
   });
 }
+
+//Obtener un usuario por id
+exports.getUsuarioPorId = (req, res) => {
+  const userId = req.params.id;
+  const query = 'SELECT * FROM usuario WHERE USU_ID = ?';
+
+  connection.query(query, [userId], (error, results) => {
+    if (error) {
+      console.error('Error al ejecutar la consulta:', error);
+      res.status(500).send('Error interno del servidor');
+    } else {
+      if (results.length === 0) {
+        res.status(404).json({ message: 'Usuario no encontrado' });
+      } else {
+        res.json(results[0]);
+      }
+    }
+  });
+};
+
+//Crear un usuario
 exports.createUsuario = async (req, res) => {
     const {USR_IDENTIFICACION, USU_NOMBRE, USU_APELLIDO, USU_GENERO, USU_ESTUDIO, USU_TIPOID, USU_FOTO, USU_CLAVE, USU_CORREO, USU_ESTADO} = req.body;
     const query = `
@@ -30,6 +53,7 @@ exports.createUsuario = async (req, res) => {
     });
 }
 
+//Actualizar un usuario
 exports.updateUsuario = async (req, res) => {
     const id = req.params.id;
     const {USR_IDENTIFICACION, USU_NOMBRE, USU_APELLIDO, USU_GENERO, USU_ESTUDIO, USU_TIPOID, USU_FOTO, USU_CLAVE, USU_CORREO, USU_ESTADO} = req.body;
@@ -49,6 +73,8 @@ exports.updateUsuario = async (req, res) => {
       }
     });
 }
+
+//Eliminar un usuario
 exports.deleteUsuario = async (req, res) => {
     const id = req.params.id;
     const query = 'DELETE FROM usuario WHERE USU_ID = ?';
