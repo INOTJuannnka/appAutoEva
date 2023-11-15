@@ -1,5 +1,5 @@
 const connection = require('../config/db');
-const jwt = require('jsonwebtoken');
+
 exports.getUsuarios = async (req, res) => {
     const query = 'SELECT * FROM usuario';
   connection.query(query, (error, results) => {
@@ -25,11 +25,9 @@ exports.createUsuario = async (req, res) => {
         res.status(500).send('Error interno del servidor');
       } else {
         res.status(201).json({ message: 'Usuario creado exitosamente' });
-        
       }
     });
 }
-
 exports.updateUsuario = async (req, res) => {
     const id = req.params.id;
     const {USR_IDENTIFICACION, USU_NOMBRE, USU_APELLIDO, USU_GENERO, USU_ESTUDIO, USU_TIPOID, USU_FOTO, USU_CLAVE, USU_CORREO, USU_ESTADO} = req.body;
