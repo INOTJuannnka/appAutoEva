@@ -1,5 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import routesUsuario from '../routes/usuario';
+import routesEvaluacion from '../routes/evaluacion';
+import routesLabores from '../routes/labor';
 import db from '../db/connection';
 
 class Server{
@@ -33,6 +35,8 @@ class Server{
 
         // Se va a la ruta usuarios en la carpeta routes/usuario.ts
         this.app.use('/api/usuarios', routesUsuario)
+        this.app.use('/api/evaluaciones', routesEvaluacion)
+        this.app.use('/api/labores', routesLabores)
     }
 
     //

@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const usuario_1 = __importDefault(require("../routes/usuario"));
+const evaluacion_1 = __importDefault(require("../routes/evaluacion"));
+const labor_1 = __importDefault(require("../routes/labor"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
@@ -40,6 +42,8 @@ class Server {
         });
         // Se va a la ruta usuarios en la carpeta routes/usuario.ts
         this.app.use('/api/usuarios', usuario_1.default);
+        this.app.use('/api/evaluaciones', evaluacion_1.default);
+        this.app.use('/api/labores', labor_1.default);
     }
     //
     midlewares() {
