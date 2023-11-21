@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUsuario = exports.createUsuario = exports.deleteUsuario = exports.getUsuario = exports.getUsuarios = void 0;
 const usuario_1 = __importDefault(require("../models/usuario"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 // Obtiene todos los usuarios
 const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // se usa Usuario para tomar del modelo sequalize el metodo findAll() y guarda los usuarios en la lista
@@ -57,6 +58,11 @@ exports.deleteUsuario = deleteUsuario;
 const createUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req; // Obteniendo el id de req
     try {
+        // Hashear la contraseña antes de almacenarla
+        const hashedPassword = bcrypt_1.default.hashSync(body.USU_CLAVE, 10); // '10' es el costo del hashing
+        // Reemplazar la contraseña sin hashear con la hasheada
+        body.USU_CLAVE = hashedPassword;
+        // Crear el usuario con la contraseña hasheada
         yield usuario_1.default.create(body); // Crea el usuario
         res.json({
             msg: 'El usuario fue creado con exito'
@@ -76,6 +82,11 @@ const updateUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const usuario = yield usuario_1.default.findByPk(id); // Encuentra el usuario por id
         if (usuario) {
+            // Si se proporciona una nueva contraseña, hashearla antes de actualizar
+            if (body.USU_CLAVE) {
+                const hashedPassword = bcrypt_1.default.hashSync(body.USU_CLAVE, 10);
+                body.USU_CLAVE = hashedPassword;
+            }
             yield usuario.update(body);
             res.json({
                 msg: 'El usuario fue editado con exito!'

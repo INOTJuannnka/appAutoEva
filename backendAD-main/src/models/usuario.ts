@@ -1,8 +1,24 @@
-import { DataTypes } from 'sequelize' // Para el tipo de datos
+import { DataTypes, Model } from 'sequelize' // Para el tipo de datos
 import db from '../db/connection'; // Conexion sequalize
 
 // Definir el modelo usuario que representa la tabla en la base de datos
-const Usuario = db.define('usuario', {
+class UsuarioModel extends Model {
+    // Definición de propiedades del modelo
+    public USU_ID!: number;
+    public USR_IDENTIFICACION!: number;
+    public USU_NOMBRE!: string;
+    public USU_APELLIDO!: string;
+    public USU_GENERO!: string;
+    public USU_ESTUDIO!: string;
+    public USU_TIPOID!: string;
+    public USU_FOTO!: string;
+    public USU_CLAVE!: string;
+    public USU_CORREO!: string;
+    public USU_ESTADO!: number;
+    public USU_ROLID!: number;
+  }
+
+const Usuario = db.define<UsuarioModel>('usuario', {
     USU_ID: {
         type: DataTypes.INTEGER,
         allowNull: false,

@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import routesUsuario from '../routes/usuario';
 import routesEvaluacion from '../routes/evaluacion';
 import routesLabores from '../routes/labor';
+import routesAutenticacion from "../routes/autenticacion";
 import db from '../db/connection';
 
 class Server{
@@ -37,6 +38,7 @@ class Server{
         this.app.use('/api/usuarios', routesUsuario)
         this.app.use('/api/evaluaciones', routesEvaluacion)
         this.app.use('/api/labores', routesLabores)
+        this.app.use('/api/autenticacion', routesAutenticacion)
     }
 
     //
